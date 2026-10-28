@@ -163,7 +163,7 @@ export default function App() {
               {' '}
               <i>/</i>
               {' '}
-              {'۲۰'}
+              {'۱۸'}
             </span>
           </div>
 

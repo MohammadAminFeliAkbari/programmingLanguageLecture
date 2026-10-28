@@ -159,7 +159,9 @@ export default function App() {
             <span className="slide-mark">
               {String(index + 1)
                 .padStart(2, '0')
-                .replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d])}
+                .replace(/\d/g, (digit: string): string =>
+                  '۰۱۲۳۴۵۶۷۸۹'[Number(digit)] ?? digit,
+                )}
               {' '}
               <i>/</i>
               {' '}

@@ -34,9 +34,9 @@ function Icon({ name }: { name: string }) {
 export default function App() {
   const [index, setIndex] = useState(0);
   const [overview, setOverview] = useState(false);
-  const [presenting, setPresenting] = useState(false);
+  const [presenting, setPresenting] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
-  const [hiddenHeader, setHiddenHeader] = useState(false)
+  const [hiddenHeaderFooter, setHiddenHeaderFooter] = useState(false)
 
   const go = useCallback(
     (n: number) =>
@@ -91,7 +91,7 @@ export default function App() {
       const isFullscreen = !!document.fullscreenElement;
 
       setFullscreen(!!document.fullscreenElement)
-      setHiddenHeader(isFullscreen);
+      setHiddenHeaderFooter(isFullscreen);
     };
 
     document.addEventListener('fullscreenchange', listener);
@@ -103,7 +103,7 @@ export default function App() {
 
   return (
     <main className={`app ${presenting ? 'presenting' : ''}`}>
-      {!hiddenHeader ? <header className="topbar">
+      {!hiddenHeaderFooter ? <header className="topbar">
         <div className="brand">
           <span className="mini-logo">TS</span>
           <span>
@@ -154,7 +154,7 @@ export default function App() {
       >
         <div className="stage" key={index}>
           <div className="slide-topline">
-            <span>{slide.kicker}</span>
+            {slide.kicker ? <span>{slide.kicker}</span> : <h1>{slide.title}</h1>}
 
             <span className="slide-mark">
               {String(index + 1)
@@ -169,7 +169,7 @@ export default function App() {
             </span>
           </div>
 
-          <h1>{slide.title}</h1>
+          {slide.kicker ?<h1 className='hidden'>{slide.title}</h1>:<div style={{height:70}}></div>}
 
           <div className="slide-content">{slide.content}</div>
 
@@ -192,7 +192,9 @@ export default function App() {
         />
       </div>
 
-      {/* <footer className="controls">
+      {
+        !hiddenHeaderFooter ? 
+        <footer className="controls">
         <div className="keyboard-hint">
           <kbd>←</kbd>
           <kbd>→</kbd>
@@ -227,7 +229,8 @@ export default function App() {
             <Icon name="next" />
           </button>
         </div>
-      </footer> */}
+      </footer>: <></>
+      }
 
       {overview && (
         <div

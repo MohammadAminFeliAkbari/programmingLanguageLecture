@@ -72,7 +72,7 @@ const cards = (items: { title: string; body: ReactNode; icon?: string }[]) => (
   <div className="cards">
     {items.map((x, i) => (
       <article className="info-card" key={i}>
-        <span className="card-icon">{x.icon ?? `0${i + 1}`}</span>
+        {/* <span className="card-icon">{x.icon ?? `0${i + 1}`}</span> */}
         <h3>{x.title}</h3>
         <p>{x.body}</p>
       </article>
@@ -91,11 +91,11 @@ const slideData: SlideData[] = [
         <div className="hero-copy">
           <div className="ts-logo">TS</div>
           <p className="lead">زبان برنامه‌نویسی‌ای برای ساخت نرم‌افزارهای قابل‌اعتمادتر و نگه‌داری‌پذیرتر</p>
-          <div className="placeholder-row">
+          {/* <div className="placeholder-row">
             <span>ارائه‌دهنده: نام شما</span>
             <span>دانشگاه: نام دانشگاه</span>
             <span>درس: نام درس</span>
-          </div>
+          </div> */}
         </div>
         <div className="hero-art">
           <div className="orbit o1" /><div className="orbit o2" /><div className="orbit o3" />
@@ -120,7 +120,7 @@ const slideData: SlideData[] = [
         </p>
         {cards([
           { icon: '★', title: 'GitHub', body: 'طبق گزارش Octoverse گیت‌هاب (۲۰۲۵)، TypeScript از نظر تعداد مشارکت‌کنندگان ماهانه به صدر رسید.' },
-          { icon: '?', title: 'نظرسنجی توسعه‌دهندگان', body: 'در Stack Overflow Developer Survey یکی از زبان‌های پرکاربرد و پرطرفدار است؛ رتبهٔ دقیق را از آخرین گزارش اضافه کنید.' },
+          { icon: '?', title: 'نظرسنجی توسعه‌دهندگان', body: 'در Stack Overflow Developer Survey یکی از زبان‌های پرکاربرد و پرطرفدار است.' },
           { icon: '⚙', title: 'فریم‌ورک‌ها', body: 'Angular با TypeScript نوشته شده؛ React، Vue، Next.js و NestJS پشتیبانی درجه‌یک دارند.' },
           { icon: '⇩', title: 'اکوسیستم npm', body: 'بیشتر پکیج‌های مهم یا خودشان TypeScript هستند یا فایل نوع دارند (DefinitelyTyped).' },
         ])}
@@ -327,7 +327,7 @@ const slideData: SlideData[] = [
   /* ───────────── ۱۰. انواع داده (۱:۳۰) ───────────── */
   {
     title: 'انواع داده در TypeScript',
-    kicker: 'نوع‌های مشترک با همهٔ زبان‌ها + نوع‌های ویژهٔ TypeScript',
+    kicker: '',
     notes: '۱.۵ دقیقه. بخش اول: نوع‌های پایه که در همهٔ زبان‌ها هست. بخش دوم: نوع‌های مخصوص TypeScript. به تفاوت any و unknown تأکید کنید.',
     content: (
       <>
@@ -354,7 +354,7 @@ const slideData: SlideData[] = [
   /* ───────────── ۱۱. نوع‌های HTML (۲:۰۰) ───────────── */
   {
     title: 'نوع‌های مرتبط با HTML و DOM',
-    kicker: 'TypeScript عنصرها و رویدادهای صفحه را هم نوع‌دار می‌کند',
+    kicker: '',
     notes: '۲ دقیقه. وقتی با HTML کار می‌کنیم، هر تگ نوع مخصوص خودش را دارد (کتابخانهٔ lib.dom). querySelector ممکن است null برگرداند، پس باید بررسی کنیم. در React هم نوع رویدادها از React.ChangeEvent و مانند آن می‌آید.',
     content: (
       <>
@@ -394,7 +394,7 @@ const slideData: SlideData[] = [
     notes: '۱.۵ دقیقه. روی ۳ مورد تمرکز: ابرمجموعهٔ JS بودن، استنباط نوع، generics. بقیه را سریع بگذرید.',
     content: (
       <>
-        <div className="split">
+        <div className="">
           <div>
             {cards([
               { title: 'ابرمجموعهٔ JavaScript', body: 'همهٔ کدهای JS معتبرند؛ مهاجرت تدریجی ممکن است.' },

@@ -204,6 +204,11 @@ a:focus-visible {
     color: #c6d2e2
 }
 
+.slide-title-spacer {
+    height: 70px;
+    flex: none
+}
+
 .slide-content p {
     margin: 0
 }
@@ -979,10 +984,21 @@ a:focus-visible {
         margin: 12px 0 16px
     }
 
+    .slide-title-spacer {
+        height: 12px
+    }
+
     .slide-content {
         font-size: clamp(12px, 2.2vw, 15px);
         gap: 12px;
-        overflow: auto
+        overflow: auto;
+        justify-content: flex-start;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch
+    }
+
+    .slide-content > table {
+        flex: none
     }
 
     .slide-footer {

@@ -204,7 +204,7 @@ export default function App() {
             </span>
           </div>
 
-          {slide.kicker ? <h1 className='hidden'>{slide.title}</h1> : <div style={{ height: 70 }}></div>}
+          {slide.kicker ? <h1 className='hidden'>{slide.title}</h1> : <div className="slide-title-spacer" />}
 
           <div className="slide-content">{slide.content}</div>
 

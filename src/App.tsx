@@ -69,10 +69,10 @@ export default function App() {
 
     if (dx < 0) {
       // کشیدن انگشت به چپ: اسلاید بعدی
-      go(index + 1);
+      go(index - 1);
     } else {
       // کشیدن انگشت به راست: اسلاید قبلی
-      go(index - 1);
+      go(index + 1);
     }
   };
 

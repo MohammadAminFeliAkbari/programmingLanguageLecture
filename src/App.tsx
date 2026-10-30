@@ -53,15 +53,29 @@ export default function App() {
   const onTouchEnd = (e: React.TouchEvent<HTMLElement>) => {
     const start = touchStart.current;
     touchStart.current = null;
-    if (!start || !window.matchMedia('(max-width: 760px)').matches) return;
+
+    if (!start || !window.matchMedia('(max-width: 760px)').matches) {
+      return;
+    }
 
     const touch = e.changedTouches[0];
     const dx = touch.clientX - start.x;
     const dy = touch.clientY - start.y;
-    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+
+    // جلوگیری از تشخیص اسکرول عمودی به‌عنوان سوایپ افقی
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.3) {
+      return;
+    }
+
+    if (dx < 0) {
+      // کشیدن انگشت به چپ: اسلاید بعدی
       go(index + 1);
+    } else {
+      // کشیدن انگشت به راست: اسلاید قبلی
+      go(index - 1);
     }
   };
+
 
   const toggleFullscreen = useCallback(async () => {
     if (!document.fullscreenElement) {

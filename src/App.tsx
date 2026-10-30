@@ -204,7 +204,7 @@ export default function App() {
             </span>
           </div>
 
-          {slide.kicker ? <h1 className='hidden'>{slide.title}</h1> : <div className="slide-title-spacer" />}
+          {slide.kicker ? <h1 className=''>{slide.title}</h1> : <div className="slide-title-spacer" />}
 
           <div className="slide-content">{slide.content}</div>
 
@@ -267,60 +267,131 @@ export default function App() {
           </footer> : <></>
       }
 
+
       {overview && (
         <div
-          className="overview-backdrop"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#02070d]/85 p-3 backdrop-blur-lg sm:p-6"
           onClick={() => setOverview(false)}
         >
           <section
-            className="overview"
             role="dialog"
             aria-modal="true"
             aria-label="نمای کلی اسلایدها"
             onClick={(e) => e.stopPropagation()}
+            className="flex max-h-[94dvh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-[#82a7d3]/20 bg-[#0a1422] text-[#eaf2ff] shadow-2xl shadow-black/60 sm:rounded-3xl"
           >
-            <div className="overview-head">
+            {/* Header */}
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-[#97b4da]/15 bg-gradient-to-l from-[#0c1829] to-[#0a1422] px-5 py-5 sm:px-8 sm:py-7">
               <div>
-                <h2>نمای کلی اسلایدها</h2>
-                <p>برای رفتن به هر اسلاید انتخاب کنید</p>
+                <span className="mb-2 block text-[10px] font-extrabold tracking-[0.25em] text-[#34d5f2]">
+                  TYPESCRIPT PRESENTATION
+                </span>
+
+                <h2 className="text-xl font-extrabold leading-relaxed text-[#f1f6ff] sm:text-3xl">
+                  نمای کلی اسلایدها
+                </h2>
+
+                <p className="mt-2 text-xs leading-7 text-[#92a3ba] sm:text-sm">
+                  برای رفتن به هر اسلاید، کارت موردنظر را انتخاب کنید.
+                </p>
               </div>
 
               <button
                 onClick={() => setOverview(false)}
                 aria-label="بستن"
+                title="بستن"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#97b4da]/20 bg-[#0c1726] text-[#a9bbd2] transition-all duration-200 hover:rotate-90 hover:border-[#34d5f2] hover:bg-[#10243a] hover:text-white focus-visible:outline-2 focus-visible:outline-[#34d5f2]"
               >
                 <Icon name="close" />
               </button>
             </div>
 
-            <div className="thumb-grid">
+            {/* Slides Grid */}
+            <div className="grid grid-cols-1 gap-3 overflow-y-auto overscroll-contain p-4 sm:grid-cols-2 sm:gap-4 sm:p-6 lg:grid-cols-3 xl:grid-cols-4 [scrollbar-color:#34506b_transparent] [scrollbar-width:thin]">
               {slides.map((s, i) => (
                 <button
                   key={s.title}
-                  className={`thumb ${i === index ? 'active' : ''}`}
                   onClick={() => {
                     go(i);
                     setOverview(false);
                   }}
+                  aria-current={i === index ? 'true' : undefined}
+                  className={`group relative flex min-h-32 min-w-0 flex-col justify-between gap-5 overflow-hidden rounded-xl border p-4 text-right transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#34d5f2] sm:min-h-36 sm:rounded-2xl sm:p-5 ${i === index
+                      ? 'border-[#34d5f2] bg-gradient-to-br from-[#194d67]/50 to-[#0c1829] shadow-[0_0_0_1px_rgba(52,213,242,0.15),0_0_25px_rgba(52,213,242,0.07)]'
+                      : 'border-[#8daad0]/15 bg-gradient-to-br from-[#12243a] to-[#0c1727] hover:border-[#34d5f2]/60 hover:from-[#16314a] hover:to-[#10243a]'
+                    }`}
                 >
-                  <span className="thumb-number">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  {/* Decorative glow */}
+                  {i === index && (
+                    <span className="pointer-events-none absolute -left-8 -top-8 h-24 w-24 rounded-full bg-[#34d5f2]/10 blur-2xl" />
+                  )}
 
-                  <strong>{s.title}</strong>
+                  {/* Card top */}
+                  <div className="relative flex items-center justify-between gap-2">
+                    <span
+                      className={`font-mono text-sm font-extrabold ${i === index
+                          ? 'text-[#34d5f2]'
+                          : 'text-[#50bcd5]'
+                        }`}
+                    >
+                      {String(i + 1)
+                        .padStart(2, '0')
+                        .replace(/\d/g, (digit) =>
+                          '۰۱۲۳۴۵۶۷۸۹'[Number(digit)] ?? digit
+                        )}
+                    </span>
 
-                  <span className="thumb-line" />
+                    {i === index && (
+                      <span className="rounded-lg border border-[#34d5f2]/20 bg-[#34d5f2]/10 px-2 py-1 text-[10px] font-bold text-[#67e3f4]">
+                        در حال نمایش
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Slide title */}
+                  <strong className="relative line-clamp-2 text-sm font-bold leading-8 text-[#e2ecf8] transition-colors group-hover:text-white sm:text-base">
+                    {s.title}
+                  </strong>
+
+                  {/* Bottom accent */}
+                  <span
+                    className={`h-[3px] rounded-full transition-all duration-300 group-hover:w-14 ${i === index
+                        ? 'w-14 bg-gradient-to-l from-[#34d5f2] to-[#4588ff] shadow-[0_0_10px_rgba(52,213,242,0.35)]'
+                        : 'w-[38%] bg-gradient-to-l from-[#3286ff] to-[#30d2e4] opacity-60 group-hover:opacity-100'
+                      }`}
+                  />
                 </button>
               ))}
             </div>
 
-            <div className="overview-foot">
-              مجموعاً {slides.length} اسلاید <span>·</span> کلید Escape
-              برای بستن
+            {/* Footer */}
+            <div className="flex shrink-0 flex-wrap items-center gap-2 border-t border-[#97b4da]/15 bg-[#08111e] px-5 py-4 text-xs text-[#92a3ba] sm:px-8">
+              <span>
+                مجموعاً{' '}
+                <strong className="text-[#34d5f2]">
+                  {slides.length}
+                </strong>{' '}
+                اسلاید
+              </span>
+
+              <span className="text-[#435167]">|</span>
+
+              <span>
+                اسلاید فعلی:{' '}
+                <strong className="text-[#34d5f2]">
+                  {index + 1}
+                </strong>
+              </span>
+
+              <span className="mr-auto hidden text-[#708198] sm:inline">
+                برای بستن، کلید Escape را فشار دهید.
+              </span>
             </div>
           </section>
         </div>
       )}
+
+
     </main>
   );
 }

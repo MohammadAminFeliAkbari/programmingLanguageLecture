@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { slides } from './data/slides';
 
 function Icon({ name }: { name: string }) {
@@ -37,12 +37,31 @@ export default function App() {
   const [presenting, setPresenting] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
   const [hiddenHeaderFooter, setHiddenHeaderFooter] = useState(false)
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const go = useCallback(
     (n: number) =>
       setIndex(Math.max(0, Math.min(slides.length - 1, n))),
     [],
   );
+
+  const onTouchStart = (e: React.TouchEvent<HTMLElement>) => {
+    const touch = e.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchEnd = (e: React.TouchEvent<HTMLElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start || !window.matchMedia('(max-width: 760px)').matches) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      go(index + 1);
+    }
+  };
 
   const toggleFullscreen = useCallback(async () => {
     if (!document.fullscreenElement) {
@@ -104,15 +123,15 @@ export default function App() {
   return (
     <main className={`app ${presenting ? 'presenting' : ''}`}>
       {!hiddenHeaderFooter ? <header className="topbar">
-        <div className="brand">
+        {/* <div className="brand">
           <span className="mini-logo">TS</span>
           <span>
             آکادمی کد <small>ارائهٔ آموزشی</small>
           </span>
-        </div>
+        </div> */}
 
         <div className="top-title">
-          مبانی TypeScript <span>·</span> آموزش دانشگاهی
+          مبانی TypeScript
         </div>
 
         <div className="top-actions">
@@ -151,6 +170,8 @@ export default function App() {
       <section
         className="stage-wrap"
         aria-label={`اسلاید ${index + 1} از ${slides.length}`}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         <div className="stage" key={index}>
           <div className="slide-topline">
@@ -169,7 +190,7 @@ export default function App() {
             </span>
           </div>
 
-          {slide.kicker ?<h1 className='hidden'>{slide.title}</h1>:<div style={{height:70}}></div>}
+          {slide.kicker ? <h1 className='hidden'>{slide.title}</h1> : <div style={{ height: 70 }}></div>}
 
           <div className="slide-content">{slide.content}</div>
 
@@ -193,43 +214,43 @@ export default function App() {
       </div>
 
       {
-        !hiddenHeaderFooter ? 
-        <footer className="controls">
-        <div className="keyboard-hint">
-          <kbd>←</kbd>
-          <kbd>→</kbd>
-          <span>جابه‌جایی بین اسلایدها</span>
-          <span className="divider">|</span>
-          <kbd>Home</kbd>
-          <kbd>End</kbd>
-        </div>
+        !hiddenHeaderFooter ?
+          <footer className="controls">
+            {/* <div className="keyboard-hint">
+              <kbd>←</kbd>
+              <kbd>→</kbd>
+              <span>جابه‌جایی بین اسلایدها</span>
+              <span className="divider">|</span>
+              <kbd>Home</kbd>
+              <kbd>End</kbd>
+            </div> */}
 
-        <div className="counter">
-          <b>{String(index + 1).padStart(2, '0')}</b>
-          <span>/</span>
-          {slides.length}
-        </div>
+            {/* <div className="counter">
+              <b>{String(index + 1).padStart(2, '0')}</b>
+              <span>/</span>
+              {slides.length}
+            </div> */}
 
-        <div className="nav-buttons">
-          <button
-            onClick={() => go(index + 1)}
-            disabled={index === slides.length - 1}
-            aria-label="اسلاید بعدی"
-            title="بعدی (→)"
-          >
-            <Icon name="prev" />
-          </button>
+            <div className="nav-buttons">
+              <button
+                onClick={() => go(index + 1)}
+                disabled={index === slides.length - 1}
+                aria-label="اسلاید بعدی"
+                title="بعدی (→)"
+              >
+                <Icon name="prev" />
+              </button>
 
-          <button
-            onClick={() => go(index - 1)}
-            disabled={index === 0}
-            aria-label="اسلاید قبلی"
-            title="قبلی (←)"
-          >
-            <Icon name="next" />
-          </button>
-        </div>
-      </footer>: <></>
+              <button
+                onClick={() => go(index - 1)}
+                disabled={index === 0}
+                aria-label="اسلاید قبلی"
+                title="قبلی (←)"
+              >
+                <Icon name="next" />
+              </button>
+            </div>
+          </footer> : <></>
       }
 
       {overview && (

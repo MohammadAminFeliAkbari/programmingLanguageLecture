@@ -388,32 +388,32 @@ const slideData: SlideData[] = [
   },
 
   /* ───────────── ۱۲. ویژگی‌های زبان (۱:۳۰) ───────────── */
-  {
-    title: 'ویژگی‌های اصلی زبان',
-    kicker: 'چرا TypeScript فقط «JavaScript با نوع» نیست',
-    notes: '۱.۵ دقیقه. روی ۳ مورد تمرکز: ابرمجموعهٔ JS بودن، استنباط نوع، generics. بقیه را سریع بگذرید.',
-    content: (
-      <>
-        <div className="">
-          <div>
-            {cards([
-              { title: 'ابرمجموعهٔ JavaScript', body: 'همهٔ کدهای JS معتبرند؛ مهاجرت تدریجی ممکن است.' },
-              { title: 'نوع‌دهی ایستا', body: 'بررسی نوع پیش از اجرا، در ویرایشگر و هنگام ساخت.' },
-              { title: 'استنباط و نوع ساختاری', body: 'سازگاری بر اساس شکل مقدار سنجیده می‌شود، نه صرفاً نام نوع.' },
-              { title: 'Union و Literal', body: 'محدودکردن مقدار به چند حالت مشخص، با Type Narrowing.' },
-              { title: 'Generics', body: 'کد عمومی بدون از دست‌دادن اطلاعات نوع.' },
-              { title: 'ماژول و ابزار', body: 'ES Modules، فایل‌های d.ts، تکمیل خودکار و بازآرایی امن.' },
-            ])}
-          </div>
-        </div>
-        {/* <div className="code-card compact">
-          {code(
-            'function identity<T>(value: T): T { return value; }\nconst text = identity("سلام");   // T = string\n\ntype Draft = Partial<User>;       // همهٔ فیلدها اختیاری\ntype Label = Pick<User, "id" | "name">;',
-          )}
-        </div> */}
-      </>
-    ),
-  },
+  // {
+  //   title: 'ویژگی‌های اصلی زبان',
+  //   kicker: 'چرا TypeScript فقط «JavaScript با نوع» نیست',
+  //   notes: '۱.۵ دقیقه. روی ۳ مورد تمرکز: ابرمجموعهٔ JS بودن، استنباط نوع، generics. بقیه را سریع بگذرید.',
+  //   content: (
+  //     <>
+  //       <div className="">
+  //         <div>
+  //           {cards([
+  //             { title: 'ابرمجموعهٔ JavaScript', body: 'همهٔ کدهای JS معتبرند؛ مهاجرت تدریجی ممکن است.' },
+  //             { title: 'نوع‌دهی ایستا', body: 'بررسی نوع پیش از اجرا، در ویرایشگر و هنگام ساخت.' },
+  //             { title: 'استنباط و نوع ساختاری', body: 'سازگاری بر اساس شکل مقدار سنجیده می‌شود، نه صرفاً نام نوع.' },
+  //             { title: 'Union و Literal', body: 'محدودکردن مقدار به چند حالت مشخص، با Type Narrowing.' },
+  //             { title: 'Generics', body: 'کد عمومی بدون از دست‌دادن اطلاعات نوع.' },
+  //             { title: 'ماژول و ابزار', body: 'ES Modules، فایل‌های d.ts، تکمیل خودکار و بازآرایی امن.' },
+  //           ])}
+  //         </div>
+  //       </div>
+  //       {/* <div className="code-card compact">
+  //         {code(
+  //           'function identity<T>(value: T): T { return value; }\nconst text = identity("سلام");   // T = string\n\ntype Draft = Partial<User>;       // همهٔ فیلدها اختیاری\ntype Label = Pick<User, "id" | "name">;',
+  //         )}
+  //       </div> */}
+  //     </>
+  //   ),
+  // },
 
   /* ───────────── ۱۳. انواع انقیاد (۱:۳۰) ───────────── */
   {

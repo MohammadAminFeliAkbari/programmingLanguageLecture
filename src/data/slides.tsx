@@ -211,6 +211,59 @@ const slideData: SlideData[] = [
     ),
   },
 
+  /* ───────────── مقایسه Python و TypeScript ───────────── */
+  {
+    title: 'آیا Python هم Type دارد؟',
+    kicker: 'مقایسهٔ Type Hints در Python با TypeScript',
+    notes:
+      'حدود ۱ دقیقه. Python هم نوع‌دهی پویا دارد، اما با Type Hints می‌توان نوع مورد انتظار را مشخص کرد. ابزارهایی مثل mypy و Pyright ناسازگاری‌های نوعی را پیش از اجرا پیدا می‌کنند. تفاوت اصلی در نحوهٔ بررسی نوع‌هاست.',
+    content: (
+      <>
+        <div className="split">
+          <div className="code-card">
+            <label>Python + Type Hints</label>
+            {code(
+              'def add(a: int, b: int) -> int:\n    return a + b\n\nadd("2", 3)\n\n# mypy / Pyright:\n# خطای ناسازگاری نوع'
+            )}
+          </div>
+
+          <div className="code-card">
+            <label>TypeScript</label>
+            {code(
+              'function add(\n  a: number,\n  b: number\n): number {\n  return a + b;\n}\n\nadd("2", 3);\n\n// Type Error'
+            )}
+          </div>
+        </div>
+
+        <div className="split">
+          <div>
+            <h3>Python</h3>
+            {bullets(
+              'نوع‌دهی پویا در زمان اجرا',
+              'Type Hints برای مشخص کردن نوع مورد انتظار',
+              'بررسی ایستا با mypy و Pyright'
+            )}
+          </div>
+
+          <div>
+            <h3>TypeScript</h3>
+            {bullets(
+              'بررسی ایستای نوع‌ها پیش از اجرا',
+              'تشخیص خطا با کامپایلر و ویرایشگر',
+              'تبدیل کد به JavaScript'
+            )}
+          </div>
+        </div>
+
+        <div className="note">
+          نکتهٔ مهم: Python هم Type دارد؛ اما Type Hints به‌تنهایی
+          مانع اجرای کد ناسازگار نمی‌شوند. ابزارهای بررسی نوع
+          می‌توانند این خطاها را پیش از اجرا گزارش کنند.
+        </div>
+      </>
+    ),
+  },
+
   /* ───────────── ۶. کامپایل و خروجی JS (۱:۳۰) ───────────── */
   {
     title: 'کد TypeScript در نهایت JavaScript می‌شود',

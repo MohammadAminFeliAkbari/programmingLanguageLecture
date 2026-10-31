@@ -237,7 +237,7 @@ const slideData: SlideData[] = [
           <div className="code-card">
             <label>خروجی: app.js</label>
             {code(
-              '"use strict";\nconst greet = (u) => `سلام ${u.name}`;\n\n// interface و نوع‌ها حذف شدند',
+              'const greet = (u) => `سلام ${u.name}`;\n\n// interface و نوع‌ها حذف شدند',
             )}
           </div>
         </div>
